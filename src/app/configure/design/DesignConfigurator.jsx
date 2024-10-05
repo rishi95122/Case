@@ -24,7 +24,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 import { useRouter, useSearchParams } from "next/navigation";
-const DesignConfigurator = ({ imageDimensions }, {}) => {
+const DesignConfigurator = ({ imageUrl, imageDimensions }, {}) => {
   const [options, setOptions] = useState({
     color: COLORS[0],
     model: MODELS.options[0],

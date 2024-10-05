@@ -1,5 +1,5 @@
 "use client";
-import { usePathname } from "next/navigation";
+// import { usePathname } from "next/navigation";
 import React from "react";
 const STEPS = [
   {
@@ -19,7 +19,7 @@ const STEPS = [
   },
 ];
 const Steps = () => {
-  const pathname = usePathname();
+  // const pathname = usePathname();
   return (
     <div className="bg-white flex pb-10 max-xl:flex-col gap-5">
       {STEPS.map((step, idx) => {

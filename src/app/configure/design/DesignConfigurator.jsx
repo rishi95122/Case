@@ -5,7 +5,7 @@ import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Rnd } from "react-rnd";
 import HandleComponent from "./HandleComponent";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Radio, RadioGroup } from "@headlessui/react";
+import { RadioGroup } from "@headlessui/react";
 import { Label } from "@/components/ui/label";
 import {
   COLORS,

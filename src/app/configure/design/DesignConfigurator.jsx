@@ -24,7 +24,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 import { useRouter, useSearchParams } from "next/navigation";
-const DesignConfigurator = ({ configId, imageUrl, imageDimensions }, {}) => {
+const DesignConfigurator = ({ imageDimensions }, {}) => {
   const [options, setOptions] = useState({
     color: COLORS[0],
     model: MODELS.options[0],
@@ -32,15 +32,15 @@ const DesignConfigurator = ({ configId, imageUrl, imageDimensions }, {}) => {
     finish: FINISHES.options[0],
   });
   const searchParams = useSearchParams();
-  const id = searchParams.get('id'); 
+  const id = searchParams.get("id");
 
-  console.log(options)
+  console.log(options);
   const [uploading, setUploading] = useState(false);
   const [renderedDimension, setRenderedDimension] = useState({
     width: imageDimensions.width / 4,
     height: imageDimensions.height / 4,
   });
-const router =useRouter()
+  const router = useRouter();
   const [renderedPosition, setRenderedPosition] = useState({
     x: 150,
     y: 205,
@@ -50,7 +50,7 @@ const router =useRouter()
   const containerRef = useRef(null);
 
   const handleUpload = async (acceptedFiles) => {
-    console.log('uploading')
+    console.log("uploading");
     setUploading(true);
     const data = new FormData();
     data.append("file", acceptedFiles);
@@ -64,7 +64,7 @@ const router =useRouter()
       .then((res) => res.json())
       .then(async (data) => {
         if (data.public_id) {
-          const response = await fetch("/api/updatecroppedimg", {
+          await fetch("/api/updatecroppedimg", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -73,15 +73,15 @@ const router =useRouter()
               imageUrl: `https://res.cloudinary.com/dlol3hguo/image/upload/v1726918664/${data.public_id}.png`,
               id: id,
               color: options.color.value,
-    model: options.model.value,
-    material:options.material.value,
-    finish:options.finish.value
+              model: options.model.value,
+              material: options.material.value,
+              finish: options.finish.value,
             }),
           });
         }
         setUploading(false);
-    
-        router.push(`/configure/preview?id=${id}`)
+
+        router.push(`/configure/preview?id=${id}`);
       })
       .catch((err) => {
         setUploading(false);
@@ -90,7 +90,7 @@ const router =useRouter()
   };
 
   async function saveConfiguration() {
-    console.log("save config")
+    console.log("save config");
     try {
       const {
         left: caseLeft,
@@ -107,10 +107,10 @@ const router =useRouter()
 
       const actualX = renderedPosition.x - leftOffset;
       const actualY = renderedPosition.y - topOffset;
-      console.log("caseleft",caseLeft)
-      console.log("conleft",containerLeft)
-      console.log("renderedPosition.x ",renderedPosition.x )
-      console.log("act",actualX)
+      console.log("caseleft", caseLeft);
+      console.log("conleft", containerLeft);
+      console.log("renderedPosition.x ", renderedPosition.x);
+      console.log("act", actualX);
       const canvas = document.createElement("canvas");
       canvas.width = width;
       canvas.height = height;
@@ -134,10 +134,10 @@ const router =useRouter()
 
       const blob = base64ToBlob(base64Data, "image/png");
       const file = new File([blob], "filename.png", { type: "image/png" });
-      console.log(blob)
+      console.log(blob);
       await handleUpload(file);
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
   }
 

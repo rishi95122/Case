@@ -42,7 +42,7 @@ const Upload = () => {
         setUploading(false);
       })
       .catch((err) => {
-        console.log(err);
+        console.log("eroor iin upload", err);
       });
   };
 

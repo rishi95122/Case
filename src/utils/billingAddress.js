@@ -2,7 +2,6 @@ import mongoose from "mongoose";
 const { Schema } = mongoose;
 
 const billingAddressSchema = new Schema({
-
     name: {
       type: String,
       required: true,

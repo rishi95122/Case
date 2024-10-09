@@ -27,7 +27,7 @@ export default function Home() {
               <p className="mt-8 text-lg lg:pr-10 max-w-prose text-center lg:text-left text-balance md:text-wrap">
                 Capture your favorite memories with your own,{" "}
                 <span className="font-semibold">one-of-one</span> phone case.
-                CaseCobra allows you to protect your memories, not just your
+                PhoneCaseCom allows you to protect your memories, not just your
                 phone case.
               </p>
               <ul className="mt-8 space-y-2 text-left font-medium flex flex-col items-center sm:items-start">
@@ -101,17 +101,17 @@ export default function Home() {
               </div>
             </div>
             <div className="flex mt-20 justify-center px-8 w-full sm:px-16 md:px-0  lg:mx-0  h-fit">
-            <div className='relative md:max-w-xl'>
-              <img
-                src='/your-image.png'
-                className='absolute w-40 lg:w-52 left-56 -top-20 select-none hidden sm:block lg:hidden xl:block'
-              />
-              <img
-                src='/line.png'
-                className='absolute w-20 -left-6 -bottom-6 select-none'
-              />
-              <Phone className='w-64' imgSrc='/testimonials/1.jpg' />
-            </div>
+              <div className="relative md:max-w-xl">
+                <img
+                  src="/your-image.png"
+                  className="absolute w-40 lg:w-52 left-56 -top-20 select-none hidden sm:block lg:hidden xl:block"
+                />
+                <img
+                  src="/line.png"
+                  className="absolute w-20 -left-6 -bottom-6 select-none"
+                />
+                <Phone className="w-64" imgSrc="/testimonials/1.jpg" />
+              </div>
             </div>
           </div>
         </MaxWidthWrapper>
@@ -130,21 +130,21 @@ export default function Home() {
             </div>
           </div>
 
-          <div className='relative flex flex-col items-center md:grid grid-cols-2 gap-40'>
+          <div className="relative flex flex-col items-center md:grid grid-cols-2 gap-40">
+            <img
+              src="/arrow.png"
+              className="absolute top-[25rem] md:top-1/2 -translate-y-1/2 z-10 left-1/2 -translate-x-1/2 rotate-90 md:rotate-0"
+            />
+
+            <div className="relative h-80 md:h-full w-full md:justify-self-end max-w-sm rounded-xl bg-gray-900/5 ring-inset ring-gray-900/10 lg:rounded-2xl">
               <img
-                src='/arrow.png'
-                className='absolute top-[25rem] md:top-1/2 -translate-y-1/2 z-10 left-1/2 -translate-x-1/2 rotate-90 md:rotate-0'
+                src="/horse.jpg"
+                className="rounded-md object-cover bg-white shadow-2xl ring-1 ring-gray-900/10 h-full w-full"
               />
-
-              <div className='relative h-80 md:h-full w-full md:justify-self-end max-w-sm rounded-xl bg-gray-900/5 ring-inset ring-gray-900/10 lg:rounded-2xl'>
-                <img
-                  src='/horse.jpg'
-                  className='rounded-md object-cover bg-white shadow-2xl ring-1 ring-gray-900/10 h-full w-full'
-                />
-              </div>
-
-              <Phone className='w-60' imgSrc='/horse_phone.jpg' />
             </div>
+
+            <Phone className="w-60" imgSrc="/horse_phone.jpg" />
+          </div>
 
           <ul className="mx-auto mt-12 max-w-prose sm:text-lg space-y-2 w-fit">
             <li className="w-fit">

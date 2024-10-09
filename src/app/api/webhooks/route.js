@@ -12,6 +12,7 @@ const updateOrderWithAddresses = async (
   shippingAddress,
   billingAddress
 ) => {
+  console.log("upload order with address");
   try {
     const newShippingAddress = new ShippingAddress({
       name: session.customer_details.name,
@@ -21,7 +22,6 @@ const updateOrderWithAddresses = async (
       street: shippingAddress.line1,
       state: shippingAddress.state,
     });
-
     const newBillingAddress = new BillingAddress({
       name: session.customer_details.name,
       city: billingAddress.city,
@@ -51,14 +51,13 @@ const updateOrderWithAddresses = async (
 };
 
 export async function POST(req) {
+  console.log("webhooks");
   try {
     const body = await req.text();
     const signature = headers().get("stripe-signature");
-
     if (!signature) {
       return new Response("Invalid signature", { status: 400 });
     }
-
     const event = stripe.webhooks.constructEvent(
       body,
       signature,

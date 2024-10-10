@@ -12,6 +12,7 @@ const Page = () => {
     const configurationId = localStorage.getItem("configurationId");
     console.log(configurationId);
     if (configurationId) fetchData(configurationId);
+    else router.push("/");
   }, []);
 
   const fetchData = async (configurationId) => {

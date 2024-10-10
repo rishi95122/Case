@@ -1,24 +1,60 @@
-import { NextResponse } from 'next/server';
-import sharp from 'sharp';
-import connectToDb from '../../../utils/mongo';
-import imageSchema from '../../../utils/schema'
+import { NextResponse } from "next/server";
+import sharp from "sharp";
+import connectToDb from "../../../utils/mongo";
+import imageSchema from "../../../utils/schema";
+
 export const POST = async (req) => {
   try {
-   await connectToDb()
-    const {imageUrl} = await req.json();
-    const response = await fetch(imageUrl);
-    const imageBuffer = await response.arrayBuffer();
-    const {width,height} = await sharp(imageBuffer).metadata();
-    const configuration= new imageSchema({
-      imgUrl:imageUrl,
-      width:width,
-      height:height
-    })
-    await configuration.save()
+    // Ensure the database connection
+    await connectToDb();
 
-    return NextResponse.json({ message: 'Data received',configuration: configuration._id }); // Send a JSON response
+    // Parse and validate the incoming request body
+    const { imageUrl } = await req.json();
+    if (!imageUrl) {
+      return NextResponse.json(
+        { error: "Image URL is required" },
+        { status: 400 }
+      );
+    }
+
+    // Fetch the image from the provided URL
+    const response = await fetch(imageUrl);
+    if (!response.ok) {
+      return NextResponse.json(
+        { error: "Failed to fetch image from URL" },
+        { status: 400 }
+      );
+    }
+
+    // Process image using Sharp
+    const imageBuffer = await response.arrayBuffer();
+    const sharpBuffer = Buffer.from(imageBuffer);
+
+    const metadata = await sharp(sharpBuffer).metadata();
+    if (!metadata.width || !metadata.height) {
+      return NextResponse.json(
+        { error: "Failed to retrieve image metadata" },
+        { status: 500 }
+      );
+    }
+
+    // Create and save image configuration in the database
+    const configuration = new imageSchema({
+      imgUrl: imageUrl,
+      width: metadata.width,
+      height: metadata.height,
+    });
+    await configuration.save();
+
+    return NextResponse.json({
+      message: "Data received",
+      configuration: configuration._id,
+    });
   } catch (error) {
-    console.error("Error parsing request body:", error);
-    return NextResponse.json({ error: 'Invalid request' }, { status: 400 });
+    console.error("Error during request:", error.message);
+    return NextResponse.json(
+      { error: "An internal server error occurred" },
+      { status: 500 }
+    );
   }
 };

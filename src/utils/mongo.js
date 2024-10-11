@@ -10,8 +10,6 @@ const connectDb = async () => {
     const db = await mongoose.connect(
       "mongodb+srv://uditya951:rishi95122@cluster0.axngq.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",
       {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
         serverSelectionTimeoutMS: 30000,
         socketTimeoutMS: 45000,
         connectTimeoutMS: 30000,
